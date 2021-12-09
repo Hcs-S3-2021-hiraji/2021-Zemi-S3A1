@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS m_user (
     encrypted_password VARCHAR(100) NOT NULL,				--暗号化されたパスワード
     user_name VARCHAR(50) NOT NULL,						--ユーザ名
     user_role VARCHAR(50) NOT NULL,						--ユーザ権限
-    user_status VARCHAR(7) NOT NULL,						--ユーザ状態
     created_at TIMESTAMP,									--登録日時
     registeredperson_id VARCHAR(254),						--登録者のユーザID
     updated_at TIMESTAMP,									--更新日時
