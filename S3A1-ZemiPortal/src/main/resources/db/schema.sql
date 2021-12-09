@@ -1,40 +1,46 @@
 /* 開発用にデータ削除を追加 : リリース時は消す
 DROP TABLE m_user;
 DROP TABLE card;
-DROP TABLE list;
 */
 
 /* ユーザマスタ */
 CREATE TABLE IF NOT EXISTS m_user (
-    user_id VARCHAR(50) PRIMARY KEY,
-    encrypted_password VARCHAR(100) NOT NULL,
-    user_name VARCHAR(50) NOT NULL,
-    user_role VARCHAR(50) NOT NULL,
-    user_status VARCHAR(7) NOT NULL,
-    created_at TIMESTAMP,
-    registeredperson_id VARCHAR(254),
-    updated_at TIMESTAMP,
-    changer_id VARCHAR(254),
-    enabled BOOLEAN
+    user_id VARCHAR(50) PRIMARY KEY,						--ユーザID
+    encrypted_password VARCHAR(100) NOT NULL,				--暗号化されたパスワード
+    user_name VARCHAR(50) NOT NULL,						--ユーザ名
+    user_role VARCHAR(50) NOT NULL,						--ユーザ権限
+    user_status VARCHAR(7) NOT NULL,						--ユーザ状態
+    created_at TIMESTAMP,									--登録日時
+    registeredperson_id VARCHAR(254),						--登録者のユーザID
+    updated_at TIMESTAMP,									--更新日時
+    changer_id VARCHAR(254),								--更新者のユーザID
+    enabled BOOLEAN											--有効・無効
 );
 
 /*カードテーブル*/
 CREATE TABLE IF NOT EXISTS card (
- card_id VARCHAR(254) PRIMARY KEY,
- card_title VARCHAR(100),
- card_detail VARCHAR(254),
- user_id VARCHAR(60) REFERENCES m_user (user_id),
- list_id VARCHAR(254) REFERENCES list (list_id),
- card_date TIMESTAMP,
- card_check CHAR(5),
- card_description VARCHAR(254),
- card_detail_description VARCHAR(254)
+	card_id VARCHAR(254) PRIMARY KEY,						--カードID
+	card_title VARCHAR(100),								--タイトル
+	card_detail VARCHAR(254),								--詳細
+	user_id VARCHAR(60) REFERENCES m_user (user_id),		--ユーザID(外部キー)
+	card_date TIMESTAMP,									--日付
+	card_check CHAR(5),										--チェックリスト
+	card_description VARCHAR(254),							--説明
+	card_detail_description VARCHAR(254)					--詳細説明
 );
 
 /*リストテーブル*/
 CREATE TABLE IF NOT EXISTS list (
- list_id VARCHAR(254) PRIMARY KEY,
- list_title VARCHAR(100),
- user_id VARCHAR(60) REFERENCES m_user (user_id),
- card_id VARCHAR(254) REFERENCES card (card_id)
+	list_id VARCHAR(254) PRIMARY KEY,						--リストID
+	list_title VARCHAR(100),								--タイトル
+	user_id VARCHAR(60) REFERENCES m_user (user_id),		--ユーザID(外部キー)
+	card_id VARCHAR(254) REFERENCES card (card_id)			--カードID(外部キー)
 );
+
+/* ボードテーブル*/
+CREATE TABLE IF NOT EXISTS board (
+	borad_id VARCHAR(254) PRIMARY KEY,						--ボードID
+	board_name VARCHAR(60),									--ボード名
+	list_id VARCHAR(254) REFERENCES list (list_id)			--リストID(外部キー)
+);
+
