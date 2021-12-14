@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String USER_SQL = "SELECT user_id, encrypted_password as password, enabled FROM m_user WHERE user_id = ?";
 
 	/** ユーザーIDと権限を取得するSQL */
-	private static final String ROLE_SQL = "SELECT user_id, role FROM m_user WHERE user_id = ?";
+	private static final String ROLE_SQL = "SELECT user_id, user_role FROM m_user WHERE user_id = ?";
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -59,11 +59,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		//ログイン処理
 		http.formLogin().loginProcessingUrl("/login") // ログイン処理のパス
-				.loginPage("/login") // ログインページの指定
 				.failureUrl("/login") // ログイン失敗時の遷移先
 				.usernameParameter("user_id") // ログインページのユーザID
 				.passwordParameter("password") // ログインページのパスワード
 				.defaultSuccessUrl("/", true); // ログイン成功後の遷移先
+
 
 		//ログアウト処理
 		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
