@@ -34,6 +34,10 @@
 	href="../static/css/ress.css">
 <link rel="stylesheet" th:href="@{/css/home.css}"
 	href="../static/css/home.css">
+<link rel="stylesheet" th:href="@{/css/index.css}"
+	href="../static/css/index.css">
+<script src="https://kit.fontawesome.com/262688c94e.js" crossorigin="anonymous"></script>
+
 
 </head>
 
@@ -42,7 +46,7 @@
 	<!-- 共通ヘッダ -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-info">
 		<h1>
-			<a class="navbar-brand title-font" th:href="@{/}">WebPortal.com</a>
+			<a class="navbar-brand title-font" th:href="@{/}">B-Freecell</a>
 		</h1>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarToggler" aria-controls="navbarToggler"
@@ -65,68 +69,88 @@
 	</nav>
 
 	<!-- コンテンツ -->
-	<div class="container">
-		<div class="row">
+	<div class="container-fluid home">
+		<div class="row flex-nowrap">
+			<div class="bg-light m-3 p-2 list">
+				<h4>TODO
+				<a class="text-dark" data-toggle="modal" data-target="#testModal1">
+					<i class="far fa-edit fa-xs"></i>
+				</a>
 
-			<div class="col-sm-6">
-				<div class="content-box">
-					<h2 style="font-family: 'メイリオ'">住所検索 - 郵便番号</h2>
-					<form method="post" th:action="@{/zip}">
-						<div class="input-group">
-							<input type="number" class="form-control" name="zipcode"
-								placeholder="郵便番号 : XXXXXXX"> <span
-								class="input-group-btn">
-								<button type="submit" class="btn btn-success">検索</button>
-							</span>
-						</div>
-					</form>
-				</div>
+				<!-- リスト名変更画面 -->
+				<div class="modal fade" id="testModal1" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    				<div class="modal-dialog">
+        			<div class="modal-content">
+           			 <div class="modal-header">
+                		<h4><div class="modal-title" id="myModalLabel">リスト名変更画面</div></h4>
+            		</div>
+           		 <div class="modal-body">
+                	 <label for="list_title">リスト名</label>
+					<input type="text" class="form-control input-box"
+						name="list_title" placeholder="xxxxxxxx">
+            	</div>
+            	<div class="modal-footer">
+                	<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                	<button type="button" class="btn btn-danger">変更</button>
+            	</div>
+       	 	</div>
+    	</div>
+	</div>
+
+				<a class="text-dark" data-toggle="modal" data-target="#testModal2">
+					<i class="far fa-trash-alt fa-xs"></i>
+				</a>
+				<!-- リスト削除画面 -->
+				<div class="modal fade" id="testModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    				<div class="modal-dialog">
+        			<div class="modal-content">
+           			 <div class="modal-header">
+                		<h4><div class="modal-title" id="myModalLabel">リスト削除画面</div></h4>
+            		</div>
+            		<div class="modal-body">
+                		<label for="list_title">このリストを削除しますか？</label>
+                	</div>
+                    <div class="modal-footer">
+                	<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                	<button type="button" class="btn btn-danger">削除</button>
+            	</div>
+       	 	</div>
+    	</div>
+	</div>
+
+				</h4>
+				<a class="text-dark" data-toggle="modal" data-target="#testModal3">
+					<i class="far fa-plus-square"></i>
+					さらにカードを追加
+				</a>
+				<!-- カード追加画面 -->
+				<div class="modal fade" id="testModal3" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    				<div class="modal-dialog">
+        			<div class="modal-content">
+           			 <div class="modal-header">
+                		<h4><div class="modal-title" id="myModalLabel">カード作成画面</div></h4>
+            		</div>
+            	<form method="post" th:action="@{/card/insert}">
+           		 <div class="modal-body">
+                	<label for="card_title">タイトル</label> <input type="text"
+						class="form-control input-box" name="card_title"
+						placeholder="xxxxx"> <label for="card_detail">詳細</label>
+					<input type="text" class="form-control input-box"
+						name="card_detail" placeholder="xxxxxxxx">
+            	</div>
+            	<div class="modal-footer">
+                	<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                	<button type="button" class="btn btn-danger">追加</button>
+            	</div>
+            	</form>
+       	 	</div>
+    	</div>
+	</div>
+
 			</div>
-
-			<div class="col-sm-6">
-			<div class="content-box">
-					<h2 style="font-family: 'メイリオ'">札幌の天気予報</h2>
-					<form method="post" th:action="@{/weather}">
-					<button type="submit" id="weather" class="btn btn-success">もっと詳しく</button>
-				</form>
 		</div>
 	</div>
 
-			<div class="col-sm-6">
-			<div class="content-box">
-					<h2 style="font-family: 'メイリオ'">直近のタスク</h2>
-					<form method="get" th:action="@{/task/tasklist}">
-					<button type="submit" id="task" class="btn btn-success">タスク管理へ</button>
-				</form>
-		</div>
-	</div>
-
-			<div class="col-sm-6">
-			<div class="content-box">
-					<h2 style="font-family: 'メイリオ'">飲食店検索 - 北海道</h2>
-					<form method="post" th:action="@{/gourmet}">
-					<input type="text" class="form-control" name="shopname"
-								placeholder="カテゴリー : XXXXXXX"> <span
-								class="input-group-btn">
-					<button type="submit" class="btn btn-success">検索</button>
-					</span>
-				</form>
-
-		</div>
-	</div>
-
-			<div class="col-sm-6" role="presentation"
-				sec:authorize="hasRole('ADMIN')">
-				<!-- 管理者のみのコンテンツ -->
-				<div class="content-box">
-					<h2>ユーザー管理</h2>
-					<form method="get" th:action="@{/user/list}">
-						<button type="submit" class="btn btn-success">ユーザー管理へ</button>
-					</form>
-				</div>
-			</div>
-</div>
-</div>
 
 	<!-- 共通スクリプト -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
