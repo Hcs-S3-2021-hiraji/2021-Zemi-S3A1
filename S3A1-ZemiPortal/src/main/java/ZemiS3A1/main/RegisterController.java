@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
  * ログインに関する機能・画面を制御する
 */
 @Controller
-public class TitleController {
+public class RegisterController {
 	/**
-	 * タイトル画面を表示する
+	 * ログイン画面を表示する
 	 * @param model
-	 * @return タイトル画面
+	 * @return ログイン画面
 	 */
-	@GetMapping("/title")
-	public String getTitle(Model model) {
-		return "title";
+	@GetMapping("/register")
+	public String getRegister(Model model) {
+		return "register";
 	}
 
 }
