@@ -8,11 +8,7 @@ CREATE TABLE IF NOT EXISTS m_user (
     user_id VARCHAR(50) PRIMARY KEY,						--ユーザID
     encrypted_password VARCHAR(100) NOT NULL,				--暗号化されたパスワード
     user_name VARCHAR(50) NOT NULL,						--ユーザ名
-    user_role VARCHAR(50) NOT NULL,						--ユーザ権限
-    created_at TIMESTAMP,									--登録日時
-    registeredperson_id VARCHAR(254),						--登録者のユーザID
-    updated_at TIMESTAMP,									--更新日時
-    changer_id VARCHAR(254),								--更新者のユーザID
+    user_role VARCHAR(50) ,									--ユーザ権限
     enabled BOOLEAN											--有効・無効
 );
 
