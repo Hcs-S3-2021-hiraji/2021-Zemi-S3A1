@@ -82,7 +82,7 @@
     				<div class="modal-dialog">
         			<div class="modal-content">
            			 <div class="modal-header">
-                		<h4><div class="modal-title" id="myModalLabel">リスト名変更画面</div></h4>
+                		<div class="modal-title" id="myModalLabel"><h4>リスト名変更画面</h4></div>
             		</div>
            		 <div class="modal-body">
                 	 <label for="list_title">リスト名</label>
@@ -97,15 +97,15 @@
     	</div>
 	</div>
 
+				<!-- リスト削除画面 -->
 				<a class="text-dark" data-toggle="modal" data-target="#testModal2">
 					<i class="far fa-trash-alt fa-xs"></i>
 				</a>
-				<!-- リスト削除画面 -->
 				<div class="modal fade" id="testModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     				<div class="modal-dialog">
         			<div class="modal-content">
            			 <div class="modal-header">
-                		<h4><div class="modal-title" id="myModalLabel">リスト削除画面</div></h4>
+                		<div class="modal-title" id="myModalLabel"><h4>リスト削除画面</h4></div>
             		</div>
             		<div class="modal-body">
                 		<label for="list_title">このリストを削除しますか？</label>
@@ -119,24 +119,33 @@
 	</div>
 
 				</h4>
+
+			<!-- カードリスト-->
+			<ul th:each="cardlist : ${cardEntity.cardList}">
+				<li>
+					<a class="card m-3">
+						<span th:text="${cardlist.card_title}"></span>
+					</a>
+				</li>
+			</ul>
+
+
+			<!-- カードの追加 -->
 				<a class="text-dark" data-toggle="modal" data-target="#testModal3">
 					<i class="far fa-plus-square"></i>
 					さらにカードを追加
 				</a>
-				<!-- カード追加画面 -->
 				<div class="modal fade" id="testModal3" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     				<div class="modal-dialog">
         			<div class="modal-content">
            			 <div class="modal-header">
-                		<h4><div class="modal-title" id="myModalLabel">カード作成画面</div></h4>
+                		<div class="modal-title" id="myModalLabel"><h4>カード作成画面</h4></div>
             		</div>
             	<form method="post" th:action="@{/card/insert}">
            		 <div class="modal-body">
                 	<label for="card_title">タイトル</label> <input type="text"
 						class="form-control input-box" name="card_title"
-						placeholder="xxxxx"> <label for="card_detail">詳細</label>
-					<input type="text" class="form-control input-box"
-						name="card_detail" placeholder="xxxxxxxx">
+						placeholder="xxxxx">
             	</div>
             	<div class="modal-footer">
                 	<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>

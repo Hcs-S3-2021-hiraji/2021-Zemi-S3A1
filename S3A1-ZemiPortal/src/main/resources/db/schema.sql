@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS card (
 	card_title VARCHAR(100),								--タイトル
 	card_detail VARCHAR(254),								--詳細
 	user_id VARCHAR(60) REFERENCES m_user (user_id),		--ユーザID(外部キー)
+	user_name VARCHAR(60) ,									--ユーザの名前
 	card_date TIMESTAMP,									--日付
 	card_check CHAR(5),										--チェックリスト
 	card_description VARCHAR(254),							--説明
