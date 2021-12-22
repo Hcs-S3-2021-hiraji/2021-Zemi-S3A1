@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class CardService {
 
 	@Autowired
-	static
-	CardRepository cardRepository;
+	static CardRepository cardRepository;
 
 	/**
 	 * 指定されたユーザIDのカード情報を全件取得する
@@ -21,7 +23,7 @@ public class CardService {
 		CardEntity cardEntity;
 		try {
 			cardEntity = cardRepository.selectAll(user_id);
-		} catch(DataAccessException e) {
+		} catch (DataAccessException e) {
 			e.printStackTrace();
 			cardEntity = null;
 		}
@@ -29,18 +31,7 @@ public class CardService {
 		return cardEntity;
 	}
 
-	public CardEntity selectAllb() {
 
-		CardEntity cardEntity;
-		try {
-			cardEntity = cardRepository.selectAllb();
-		} catch(DataAccessException e) {
-			e.printStackTrace();
-			cardEntity = null;
-		}
-
-		return cardEntity;
-	}
 
 	/**
 	 * タイトル情報のみでの生成
@@ -49,11 +40,18 @@ public class CardService {
 	 * @param card_title
 	 * @return
 	 */
-	public static boolean insertTitle(CardData data, int card_id, String card_title) {
+	public boolean insert(String user_id, Integer card_id, String card_title) {
+		CardData cardData = new CardData();
 
-		int rowNumber = cardRepository.insertTitle(data, card_id, card_title);
+		int rowNumber = cardRepository.insertTitle(cardData);
 
 		boolean result = (rowNumber > 0) ? true : false;
+
+		if(result) {
+			log.warn("登録成功");
+		} else {
+			log.warn("登録失敗");
+		}
 
 		return result;
 	}
@@ -63,17 +61,17 @@ public class CardService {
 	 * @param data
 	 * @param card_id
 	 * @return
-	 */
+	 *//*
 
-	public static boolean insert(String user_id, CardData data, int card_id, String card_title) {
+		public static boolean insert(String user_id, CardData data, int card_id, String card_title) {
 
-		int rowNumber = cardRepository.insert(user_id, data, card_id, card_title);
+		int rowNumber = cardRepository.insertOne(user_id, data, card_id, card_title);
 
 		boolean result = (rowNumber > 0) ? true : false;
 
 		return result;
-	}
-
+		}
+		*/
 	/**
 	 * カードの変更
 	 * @param data

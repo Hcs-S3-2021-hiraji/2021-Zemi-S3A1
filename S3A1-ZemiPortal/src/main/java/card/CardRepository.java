@@ -14,7 +14,7 @@ import lombok.Data;
 public class CardRepository {
 
 	/** SQL カード情報を全件取得 */
-	private static final String SQL_CARD_ALL = "SELECT * FROM card";
+	private static final String SQL_CARD_ALL = "SELECT * FROM card WHERE user_id = ?";
 
 	/** SQL カードの追加 */
 	private static final String SQL_INSERT_TITLE = "INSERT INTO card (card_id, card_title, card_detail, user_id, card_date, card_check, card_description, card_detail_description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -31,21 +31,19 @@ public class CardRepository {
 	@Autowired
 	private JdbcTemplate jdbc;
 
+/**
+ * カード情報全件取得
+ * @param user_id
+ * @return
+ * @throws DataAccessException
+ */
 public CardEntity selectAll(String user_id) throws DataAccessException  {
 
-		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_CARD_ALL);
-
+		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_CARD_ALL,user_id);
 		CardEntity cardEntity = mappingResult(resultList);
 		return cardEntity;
 	}
 
-public CardEntity selectAllb() throws DataAccessException  {
-
-	List<Map<String, Object>> resultList = jdbc.queryForList(SQL_CARD_ALL);
-
-	CardEntity cardEntity = mappingResult(resultList);
-	return cardEntity;
-}
 
 /**
  * カードタイトルを1件追加
@@ -54,9 +52,12 @@ public CardEntity selectAllb() throws DataAccessException  {
  * @return
  */
 
-public int insertTitle(CardData data, int card_id, String card_title) {
+public int insertTitle(CardData data) throws DataAccessException {
 
-	int rowNumber = jdbc.update(SQL_INSERT_TITLE, card_id, card_title);
+	int rowNumber = jdbc.update(SQL_INSERT_TITLE,
+			data.getUser_id(),
+			data.getCard_title()
+			);
 
 	return rowNumber;
 }
@@ -68,11 +69,12 @@ public int insertTitle(CardData data, int card_id, String card_title) {
 	 * @return
 	 */
 
-	public int insert(String user_name, CardData data, int card_id, String card_title) {
+	public int insertOne(CardData data) {
 
 		int rowNumber = jdbc.update(SQL_CARD_INSERT,
-				card_id,
-				card_title,
+				data.getUser_id(),
+				data.getCard_id(),
+				data.getCard_title(),
 				data.getCard_detail(),
 				data.getCard_date(),
 				data.getCard_check(),
@@ -119,14 +121,14 @@ public int insertTitle(CardData data, int card_id, String card_title) {
 	 * @return
 	 */
 
-	public CardEntity mappingResult(List<Map<String, Object>> resultList) {
+	public CardEntity mappingResult(List<Map<String, Object>> resultList) throws DataAccessException {
 		CardEntity entity = new CardEntity();
 
 		for (Map<String, Object> map : resultList) {
 
 			CardData data = new CardData();
 
-			data.setCard_id((int) map.get("card_id"));
+			data.setCard_id((Integer) map.get("card_id"));
 			data.setCard_title((String) map.get("card_title"));
 			data.setCard_detail((String) map.get("card_detail"));
 			data.setUser_id((String) map.get("user_id"));

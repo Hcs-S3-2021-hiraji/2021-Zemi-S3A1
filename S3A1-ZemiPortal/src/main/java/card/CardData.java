@@ -13,7 +13,7 @@ public class CardData {
 	 * カードID
 	 */
 
-	private int card_id;
+	private Integer card_id;
 
 	/**
 	 * カードタイトル

@@ -23,11 +23,11 @@ public class CardController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping("index")
-	public String getTitleCard(Model model,String user_id) {
-		CardEntity entity = cardService.selectAll(user_id);
+	@GetMapping("index")
+	public String getTitleCard(Principal principal,Model model) {
+		CardEntity cardEntity = cardService.selectAll(principal.getName());
 
-		model.addAttribute("cardEntity", entity);
+		model.addAttribute("cardEntity", cardEntity);
 		return "index";
 	}
 
@@ -39,21 +39,20 @@ public class CardController {
 	 * @return
 	 */
 
-	@PostMapping("card/insert")
-	public String insert(@RequestParam("card_title") String card_title,
-			Principal principal, Model model, CardData data, int card_id) {
+	@PostMapping("index")
+	public String insertCard(@RequestParam("card_title") String card_title,
+			Principal principal, Model model, CardData data, Integer card_id) {
 
-		boolean result = CardService.insert(principal.getName(),data, card_id, card_title);
+		boolean result = cardService.insert(principal.getName(), card_id, card_title);
+		log.info("[" + principal.getName() + "]：" + "タイトル：" + card_title);
 
 		if(result) {
-			log.warn("[" + principal.getName() + "]カードの追加成功");
-			model.addAttribute("message", "追加成功");
+			log.warn("成功");
 		} else {
-			log.warn("[" + principal.getName() + "]カードの追加失敗");
-			model.addAttribute("message", "追加失敗");
+			log.warn("失敗");
 		}
 
-		return getTitleCard(model, principal.getName());
+		return getTitleCard(principal,model);
 	}
 
 	@GetMapping("ボード画面")
@@ -70,7 +69,7 @@ public class CardController {
 		return "ボード画面";
 	}
 
-	@PostMapping("")
+	/*@PostMapping("")
 	public String deleteOne(@RequestParam("card_id") String card_id, Principal principal, Model model) {
 
 		boolean result = cardService.deleteOne(card_id);
@@ -82,14 +81,7 @@ public class CardController {
 		}
 
 		return getCardList(model);
-	}
+	}*/
 
-	public String getCardList(Model model) {
 
-		CardEntity cardEntity = cardService.selectAllb();
-
-		model.addAttribute("cardEntity" + cardEntity);
-
-		return "index";
-	}
 }

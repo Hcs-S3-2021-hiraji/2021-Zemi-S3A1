@@ -37,6 +37,7 @@
 <link rel="stylesheet" th:href="@{/css/index.css}"
 	href="../static/css/index.css">
 <script src="https://kit.fontawesome.com/262688c94e.js" crossorigin="anonymous"></script>
+<script th:src="@{/js/index.js}"></script>
 
 
 </head>
@@ -121,7 +122,7 @@
 				</h4>
 
 			<!-- カードリスト-->
-			<ul th:each="cardlist : ${cardEntity.cardList}">
+			<ul th:each="cardlist : ${cardEntity}">
 				<li>
 					<a class="card m-3">
 						<span th:text="${cardlist.card_title}"></span>
@@ -131,27 +132,27 @@
 
 
 			<!-- カードの追加 -->
-				<a class="text-dark" data-toggle="modal" data-target="#testModal3">
+				<a class="text-dark" data-toggle="modal" data-target="#card-addition">
 					<i class="far fa-plus-square"></i>
 					さらにカードを追加
 				</a>
-				<div class="modal fade" id="testModal3" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    				<div class="modal-dialog">
+				<div class="modal fade" id="card-addition" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    				<div class="modal-dialog" role="document">
         			<div class="modal-content">
            			 <div class="modal-header">
-                		<div class="modal-title" id="myModalLabel"><h4>カード作成画面</h4></div>
+                		<h5 class="modal-title" id="exampleModalLabel">カード作成画面</h5>
             		</div>
-            	<form method="post" th:action="@{/card/insert}">
            		 <div class="modal-body">
+           		 <form method="post" th:action="@{/index}">
                 	<label for="card_title">タイトル</label> <input type="text"
 						class="form-control input-box" name="card_title"
 						placeholder="xxxxx">
             	</div>
+
             	<div class="modal-footer">
                 	<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-                	<button type="submit" class="btn btn-danger"  data-dismiss="modal">追加</button>
+                	<button type="submit" class="btn btn-danger">追加</button>
             	</div>
-            	</form>
        	 	</div>
     	</div>
 	</div>
