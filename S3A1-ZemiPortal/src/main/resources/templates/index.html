@@ -74,50 +74,17 @@
 		<div class="row flex-nowrap">
 			<div class="bg-light m-3 p-2 list">
 				<h4>TODO
-				<a class="text-dark" data-toggle="modal" data-target="#testModal1">
+
+				<!-- リスト名変更機能 -->
+				<a class="text-dark">
 					<i class="far fa-edit fa-xs"></i>
 				</a>
 
-				<!-- リスト名変更画面 -->
-				<div class="modal fade" id="testModal1" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    				<div class="modal-dialog">
-        			<div class="modal-content">
-           			 <div class="modal-header">
-                		<div class="modal-title" id="myModalLabel"><h4>リスト名変更画面</h4></div>
-            		</div>
-           		 <div class="modal-body">
-                	 <label for="list_title">リスト名</label>
-					<input type="text" class="form-control input-box"
-						name="list_title" placeholder="xxxxxxxx">
-            	</div>
-            	<div class="modal-footer">
-                	<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-                	<button type="button" class="btn btn-danger">変更</button>
-            	</div>
-       	 	</div>
-    	</div>
-	</div>
-
-				<!-- リスト削除画面 -->
-				<a class="text-dark" data-toggle="modal" data-target="#testModal2">
+				<!-- リスト削除機能 -->
+				<a class="text-dark">
 					<i class="far fa-trash-alt fa-xs"></i>
 				</a>
-				<div class="modal fade" id="testModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    				<div class="modal-dialog">
-        			<div class="modal-content">
-           			 <div class="modal-header">
-                		<div class="modal-title" id="myModalLabel"><h4>リスト削除画面</h4></div>
-            		</div>
-            		<div class="modal-body">
-                		<label for="list_title">このリストを削除しますか？</label>
-                	</div>
-                    <div class="modal-footer">
-                	<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-                	<button type="button" class="btn btn-danger">削除</button>
-            	</div>
-       	 	</div>
-    	</div>
-	</div>
+
 
 				</h4>
 
@@ -131,29 +98,30 @@
 			</ul>
 
 
-			<!-- カードの追加 -->
+			<!-- カードの追加機能 -->
 				<a class="text-dark" data-toggle="modal" data-target="#card-addition">
 					<i class="far fa-plus-square"></i>
 					さらにカードを追加
 				</a>
-				<div class="modal fade" id="card-addition" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal fade" id="card-addition" tabindex="-1" role="dialog" aria-labelledby="card-additionLabel" aria-hidden="true">
     				<div class="modal-dialog" role="document">
         			<div class="modal-content">
            			 <div class="modal-header">
-                		<h5 class="modal-title" id="exampleModalLabel">カード作成画面</h5>
+                		<h5 class="modal-title" id="card-additionLabel">カード作成画面</h5>
             		</div>
+            	<form method="post" th:action="@{/index}">
            		 <div class="modal-body">
-           		 <form method="post" th:action="@{/index}">
-                	<label for="card_title">タイトル</label> <input type="text"
-						class="form-control input-box" name="card_title"
-						placeholder="xxxxx">
+           		 	<div class="form-group">
+                	<label for="card_title" class="col-from-laebl">タイトル</label>
+                	<input type="text" class="form-control" name="card_title"
+                		id="card_title" placeholder="xxxxx">
             	</div>
-
             	<div class="modal-footer">
                 	<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
                 	<button type="submit" class="btn btn-danger">追加</button>
             	</div>
        	 	</div>
+       	 	</form>
     	</div>
 	</div>
 
