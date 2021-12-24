@@ -1,5 +1,6 @@
 package card;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,38 +30,40 @@ public class CardRepository {
 	private static final String SQL_CARD_DELETE = "DELETE FROM card WHERE card_id = ?";
 
 	@Autowired
-	private JdbcTemplate jdbc;
+	JdbcTemplate jdbc;
 
-/**
- * カード情報全件取得
- * @param user_id
- * @return
- * @throws DataAccessException
- */
-public CardEntity selectAll(String user_id) throws DataAccessException  {
+	/**
+	 * カード情報全件取得
+	 * @param user_id
+	 * @return
+	 * @throws DataAccessException
+	 */
+	public CardEntity selectAll(String user_id) throws DataAccessException {
 
-		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_CARD_ALL,user_id);
+		JdbcTemplate jdbc2 = new JdbcTemplate();
+
+		List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
+
+		resultList = jdbc2.queryForList(SQL_CARD_ALL, user_id);
 		CardEntity cardEntity = mappingResult(resultList);
 		return cardEntity;
 	}
 
+	/**
+	 * カードタイトルを1件追加
+	 * @param data
+	 * @param card_id
+	 * @return
+	 */
 
-/**
- * カードタイトルを1件追加
- * @param data
- * @param card_id
- * @return
- */
+	public int insertTitle(CardData data) throws DataAccessException {
 
-public int insertTitle(CardData data) throws DataAccessException {
+		int rowNumber = jdbc.update(SQL_INSERT_TITLE,
+				data.getUser_id(),
+				data.getCard_title());
 
-	int rowNumber = jdbc.update(SQL_INSERT_TITLE,
-			data.getUser_id(),
-			data.getCard_title()
-			);
-
-	return rowNumber;
-}
+		return rowNumber;
+	}
 
 	/**
 	 * カード情報を1件追加
@@ -108,7 +111,7 @@ public int insertTitle(CardData data) throws DataAccessException {
 	 * @return
 	 */
 
-	public int deleteOne (String card_id) {
+	public int deleteOne(String card_id) {
 
 		int rowNumber = jdbc.update(SQL_CARD_DELETE, card_id);
 
@@ -137,6 +140,8 @@ public int insertTitle(CardData data) throws DataAccessException {
 			data.setCard_check((String) map.get("card_check"));
 			data.setCard_description((String) map.get("card_description"));
 			data.setCard_detail_description((String) map.get("card_detail_description"));
+
+			entity.getCardList().add(data);
 		}
 
 		return entity;

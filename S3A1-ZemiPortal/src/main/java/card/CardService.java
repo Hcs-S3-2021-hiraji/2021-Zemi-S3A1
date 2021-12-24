@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CardService {
 
 	@Autowired
-	static CardRepository cardRepository;
+	CardRepository cardRepository;
 
 	/**
 	 * 指定されたユーザIDのカード情報を全件取得する
@@ -20,9 +20,13 @@ public class CardService {
 	 */
 	public CardEntity selectAll(String user_id) {
 
-		CardEntity cardEntity;
+		CardEntity cardEntity = new CardEntity();
+		CardRepository cardRepository2 = new CardRepository();
+
+		log.info("確認用：" + user_id);
+
 		try {
-			cardEntity = cardRepository.selectAll(user_id);
+			cardEntity = cardRepository2.selectAll(user_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			cardEntity = null;
@@ -30,8 +34,6 @@ public class CardService {
 
 		return cardEntity;
 	}
-
-
 
 	/**
 	 * タイトル情報のみでの生成
@@ -47,7 +49,7 @@ public class CardService {
 
 		boolean result = (rowNumber > 0) ? true : false;
 
-		if(result) {
+		if (result) {
 			log.warn("登録成功");
 		} else {
 			log.warn("登録失敗");

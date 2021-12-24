@@ -53,12 +53,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated(); // それ以外は直リンク禁止
 
 		//ログイン処理
-		http.formLogin().loginProcessingUrl("/title") // ログイン処理のパ
-				.loginPage("/title") // ログインページの指定
-				.defaultSuccessUrl("/", true); // ログイン成功後の遷移先
+//		http.formLogin().loginProcessingUrl("/title") // ログイン処理のパ
+//				.loginPage("/title") // ログインページの指定
+//				.defaultSuccessUrl("/", true); // ログイン成功後の遷移先
 
 		//ログイン処理
 		http.formLogin().loginProcessingUrl("/login") // ログイン処理のパス
+				.loginPage("/login")	//ログインページの指定
 				.failureUrl("/login") // ログイン失敗時の遷移先
 				.usernameParameter("user_id") // ログインページのユーザID
 				.passwordParameter("password") // ログインページのパスワード

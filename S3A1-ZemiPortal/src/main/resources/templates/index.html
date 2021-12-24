@@ -22,7 +22,8 @@
 	href="../static/img/favicon.ico">
 <link rel="shortcut icon" th:href="@{/img/favicon.ico}">
 <link rel="apple-touch-icon" th:href="@{/img/favicon.ico}">
-<link rel="apple-touch-icon" th:href="@{/img/favicon.ico}" sizes="192x192">
+<link rel="apple-touch-icon" th:href="@{/img/favicon.ico}"
+	sizes="192x192">
 <link rel="apple-touch-icon" th:href="@{/img/favicon.ico}" sizes="58x58">
 
 <!-- スタイル設定 -->
@@ -36,7 +37,8 @@
 	href="../static/css/home.css">
 <link rel="stylesheet" th:href="@{/css/index.css}"
 	href="../static/css/index.css">
-<script src="https://kit.fontawesome.com/262688c94e.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/262688c94e.js"
+	crossorigin="anonymous"></script>
 <script th:src="@{/js/index.js}"></script>
 
 
@@ -73,58 +75,62 @@
 	<div class="container-fluid home">
 		<div class="row flex-nowrap">
 			<div class="bg-light m-3 p-2 list">
-				<h4>TODO
+				<h4>
+					TODO
 
-				<!-- リスト名変更機能 -->
-				<a class="text-dark">
-					<i class="far fa-edit fa-xs"></i>
-				</a>
+					<!-- リスト名変更機能 -->
+					<a class="text-dark"> <i class="far fa-edit fa-xs"></i>
+					</a>
 
-				<!-- リスト削除機能 -->
-				<a class="text-dark">
-					<i class="far fa-trash-alt fa-xs"></i>
-				</a>
+					<!-- リスト削除機能 -->
+					<a class="text-dark"> <i class="far fa-trash-alt fa-xs"></i>
+					</a>
 
 
 				</h4>
 
-			<!-- カードリスト-->
-			<ul th:each="cardlist : ${cardEntity}">
-				<li>
-					<a class="card m-3">
-						<span th:text="${cardlist.card_title}"></span>
-					</a>
-				</li>
-			</ul>
+				<!-- カードリスト-->
+				<ul th:each="cardlist : ${cardEntity}">
+					<li><a class="card m-3"> <span
+							th:text="${cardlist.card_title}"></span>
+					</a></li>
+				</ul>
 
 
-			<!-- カードの追加機能 -->
-				<a class="text-dark" data-toggle="modal" data-target="#card-addition">
-					<i class="far fa-plus-square"></i>
+				<!-- カードの追加機能 -->
+				<a class="text-dark" data-toggle="modal"
+					data-target="#card-addition"> <i class="far fa-plus-square"></i>
 					さらにカードを追加
 				</a>
-				<div class="modal fade" id="card-addition" tabindex="-1" role="dialog" aria-labelledby="card-additionLabel" aria-hidden="true">
-    				<div class="modal-dialog" role="document">
-        			<div class="modal-content">
-           			 <div class="modal-header">
-                		<h5 class="modal-title" id="card-additionLabel">カード作成画面</h5>
-            		</div>
-            	<form method="post" th:action="@{/index}">
-           		 <div class="modal-body">
-           		 	<div class="form-group">
-                	<label for="card_title" class="col-from-laebl">タイトル</label>
-                	<input type="text" class="form-control" name="card_title"
-                		id="card_title" placeholder="xxxxx">
-            	</div>
-            	<div class="modal-footer">
-                	<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-                	<button type="submit" class="btn btn-danger">追加</button>
-            	</div>
-       	 	</div>
-       	 	</form>
-    	</div>
-	</div>
+				<div class="modal fade" id="card-addition" tabindex="-1"
+					role="dialog" aria-labelledby="card-additionLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="card-additionLabel">カード作成画面</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<form method="post" th:action="@{/}">
+								<div class="modal-body">
+									<div class="form-group">
+										<label for="card_title" class="col-from-laebl">タイトル</label> <input
+											type="text" class="form-control" name="card_title"
+											id="card_title" placeholder="xxxxx">
+									</div>
 
+								</div>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-danger" name="card_title">追加</button>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
 			</div>
 		</div>
 	</div>
