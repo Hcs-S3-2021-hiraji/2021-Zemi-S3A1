@@ -23,8 +23,6 @@ public class CardService {
 		CardEntity cardEntity = new CardEntity();
 		//CardRepository cardRepository2 = new CardRepository();
 
-
-
 		log.info("確認用：" + user_id);
 
 		try {
@@ -46,7 +44,7 @@ public class CardService {
 	 */
 	public boolean insert(String user_id, String card_title, CardData data) {
 
-		int rowNumber = cardRepository.insertTitle(data);
+		int rowNumber = cardRepository.insertTitle(data, user_id);
 
 		boolean result = (rowNumber > 0) ? true : false;
 
