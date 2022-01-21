@@ -1,7 +1,6 @@
 package jp.ac.hcs.ZemiS3A1.card;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,10 +16,10 @@ public class CardRepository {
 	private static final String SQL_CARD_ALL = "SELECT * FROM card WHERE user_id = ?";
 
 	/** SQL カードの追加 */
-	private static final String SQL_INSERT_TITLE = "INSERT INTO card (card_id, card_title, user_id) VALUES (?, ?, ?)";
+	private static final String SQL_INSERT_TITLE = "INSERT INTO card (card_id, card_title, user_id) VALUES ((SELECT MAX(card_id) + 1 FROM card), ?, ?)";
 
-	/** SQL カードの中身の追加 */
-	private static final String SQL_CARD_INSERT = "INSERT INTO card (card_id, card_title, card_detail, user_id, card_date, card_check, card_description, card_detail_description) VALUES ((SELECT MAX(card_id) + 1 FROM card), ?, ?, ?, ?, ?, ?, ?)";
+	/** SQL カードの中身の追加 *//*
+						private static final String SQL_CARD_INSERT = "INSERT INTO card (card_id, card_title, card_detail, user_id, card_date, card_check, card_description, card_detail_description) VALUES ((SELECT MAX(card_id) + 1 FROM card), ?, ?, ?, ?, ?, ?, ?)";*/
 
 	/** SQL カードの修正 */
 	private static final String SQL_CARD_REVISION = "UPDATA card() WHERE card_id = ?";
@@ -65,27 +64,27 @@ public class CardRepository {
 		return rowNumber;
 	}
 
-	/**
-	 * カード情報を1件追加
-	 * @param data
-	 * @param card_id
-	 * @return
-	 */
+	/*	*//**
+			* カード情報を1件追加
+			* @param data
+			* @param card_id
+			* @return
+			*//*
 
-	public int insertOne(CardData data) {
+				public int insertOne(CardData data) {
 
-		int rowNumber = jdbc.update(SQL_CARD_INSERT,
-				data.getUser_id(),
-				data.getCard_id(),
-				data.getCard_title(),
-				data.getCard_detail(),
-				data.getCard_date(),
-				data.getCard_check(),
-				data.getCard_description(),
-				data.getCard_detail_description());
+				int rowNumber = jdbc.update(SQL_CARD_INSERT,
+						data.getUser_id(),
+						data.getCard_id(),
+						data.getCard_title(),
+						data.getCard_detail(),
+						data.getCard_date(),
+						data.getCard_check(),
+						data.getCard_description(),
+						data.getCard_detail_description());
 
-		return rowNumber;
-	}
+				return rowNumber;
+				}*/
 
 	/**
 	 * カードの変更
@@ -131,16 +130,15 @@ public class CardRepository {
 
 			CardData data = new CardData();
 
-			data.setCard_id((String) map.get("card_id"));
+			data.setCard_id((Integer) map.get("card_id"));
 			data.setCard_title((String) map.get("card_title"));
-			data.setCard_detail((String) map.get("card_detail"));
 			data.setUser_id((String) map.get("user_id"));
-			data.setList_id((String) map.get("list_id"));
+			/*data.setList_id((String) map.get("list_id"));
 			data.setCard_date((Date) map.get("card_date"));
 			data.setCard_check((String) map.get("card_check"));
 			data.setCard_description((String) map.get("card_description"));
 			data.setCard_detail_description((String) map.get("card_detail_description"));
-
+			*/
 			entity.getCardList().add(data);
 		}
 

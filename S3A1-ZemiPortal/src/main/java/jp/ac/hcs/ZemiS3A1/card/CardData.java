@@ -15,7 +15,7 @@ public class CardData {
 	 * カードID
 	 */
 
-	private String card_id;
+	private Integer card_id;
 
 	/**
 	 * カードタイトル

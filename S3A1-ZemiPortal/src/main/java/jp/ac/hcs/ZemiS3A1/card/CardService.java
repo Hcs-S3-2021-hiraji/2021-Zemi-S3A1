@@ -44,10 +44,9 @@ public class CardService {
 	 * @param card_title
 	 * @return
 	 */
-	public boolean insert(String user_id, String card_id, String card_title) {
-		CardData cardData = new CardData();
+	public boolean insert(String user_id, String card_title, CardData data) {
 
-		int rowNumber = cardRepository.insertTitle(cardData);
+		int rowNumber = cardRepository.insertTitle(data);
 
 		boolean result = (rowNumber > 0) ? true : false;
 
