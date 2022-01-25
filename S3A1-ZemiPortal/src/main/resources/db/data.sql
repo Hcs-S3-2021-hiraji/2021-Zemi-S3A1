@@ -12,7 +12,7 @@ VALUES('abe@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1
 
 /* カードテーブルのデータ*/
 INSERT INTO card (card_id, card_title, user_id)
-VALUES ('1', 'aaa', 'isida@xxx.co.jp');
+VALUES (1, 'aaa', 'isida@xxx.co.jp');
 
 /* リストテーブルのデータ*/
 INSERT INTO list (list_id, list_title, user_id, card_id) VALUES ('1', 'list', 'isida@xxx.co.jp', '1');

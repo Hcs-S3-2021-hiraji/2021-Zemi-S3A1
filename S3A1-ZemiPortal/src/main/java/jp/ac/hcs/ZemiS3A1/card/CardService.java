@@ -80,7 +80,7 @@ public class CardService {
 	 * @return
 	 */
 
-	public boolean updateOne(CardData data, String card_id) {
+	public boolean updateOne(CardData data, Integer card_id) {
 
 		int rowNumber = cardRepository.updateOne(data, card_id);
 

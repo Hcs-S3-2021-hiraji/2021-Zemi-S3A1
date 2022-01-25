@@ -22,7 +22,7 @@ public class CardRepository {
 						private static final String SQL_CARD_INSERT = "INSERT INTO card (card_id, card_title, card_detail, user_id, card_date, card_check, card_description, card_detail_description) VALUES ((SELECT MAX(card_id) + 1 FROM card), ?, ?, ?, ?, ?, ?, ?)";*/
 
 	/** SQL カードの修正 */
-	private static final String SQL_CARD_REVISION = "UPDATA card SET card_title = ?, card_detail = ? WHERE card_id = ?";
+	private static final String SQL_CARD_REVISION = "UPDATE card SET card_title = ? WHERE card_id = ?";
 
 	/** SQL カードの削除 */
 	private static final String SQL_CARD_DELETE = "DELETE FROM card WHERE card_id = ?";
@@ -93,11 +93,10 @@ public class CardRepository {
 	 * @return
 	 */
 
-	public int updateOne(CardData data, String card_id) {
+	public int updateOne(CardData data, Integer card_id) {
 
 		int rowNumber = jdbc.update(SQL_CARD_REVISION,
-				data.getCard_title(),
-				data.getCard_detail());
+				data.getCard_title());
 		return rowNumber;
 	}
 
