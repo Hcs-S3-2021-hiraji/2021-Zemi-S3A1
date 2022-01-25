@@ -4,32 +4,32 @@ import lombok.Data;
 
 @Data
 public class ListData {
-	
+
 	/**
 	 * １件分のリスト情報
 	 */
-	
+
 	/**
 	 * リストID
 	 */
-	
-	private String list_id;
-	
+
+	private Integer list_id;
+
 	/**
 	 * リストタイトル
 	 */
-	
-	private String liset_title;
-	
+
+	private String list_title;
+
 	/**
 	 * ユーザ名
 	 */
-	
-	private String user_name;
-	
+
+	private String user_id;
+
 	/**
 	 * カードID
 	 */
-	
-	private String card_id;
+
+	private Integer card_id;
 }
