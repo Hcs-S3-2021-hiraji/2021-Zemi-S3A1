@@ -29,8 +29,7 @@ CREATE TABLE IF NOT EXISTS card (
 CREATE TABLE IF NOT EXISTS list (
 	list_id INT PRIMARY KEY,								--リストID
 	list_title VARCHAR(100),								--タイトル
-	user_id VARCHAR(60) REFERENCES m_user (user_id),		--ユーザID(外部キー)
-	card_id INT REFERENCES card (card_id)					--カードID(外部キー)
+	user_id VARCHAR(60) REFERENCES m_user (user_id)		--ユーザID(外部キー)
 );
 
 /* ボードテーブル*/

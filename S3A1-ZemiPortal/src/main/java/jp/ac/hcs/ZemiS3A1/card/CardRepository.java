@@ -18,8 +18,8 @@ public class CardRepository {
 	/** SQL カードの追加 */
 	private static final String SQL_INSERT_TITLE = "INSERT INTO card (card_id, card_title, user_id) VALUES ((SELECT MAX(card_id) + 1 FROM card), ?, ?)";
 
-	/** SQL カードの中身の追加 *//*
-						private static final String SQL_CARD_INSERT = "INSERT INTO card (card_id, card_title, card_detail, user_id, card_date, card_check, card_description, card_detail_description) VALUES ((SELECT MAX(card_id) + 1 FROM card), ?, ?, ?, ?, ?, ?, ?)";*/
+	/** SQL 1件取得 */
+	private static final String SQL_SELECT_CARD_ONE = "SELECT * FROM card WHERE card_id = ?";
 
 	/** SQL カードの修正 */
 	private static final String SQL_CARD_REVISION = "UPDATE card SET card_title = ? WHERE card_id = ?";
@@ -48,6 +48,20 @@ public class CardRepository {
 	}
 
 	/**
+	 * カードテーブルからカードIDをキーにデータを1件を取得.
+	 * @param card_id 検索するカードID
+	 * @return CardEntity
+	 * @throws DataAccessException
+	 */
+	public CardData selectOne(Integer card_id) throws DataAccessException {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_CARD_ONE, card_id);
+		CardEntity entity = mappingResult(resultList);
+		// 必ず1件のみのため、最初のCardDataを取り出す
+		CardData data = entity.getCardList().get(0);
+		return data;
+	}
+
+	/**
 	 * カードタイトルを1件追加
 	 * @param data
 	 * @param card_id
@@ -64,27 +78,7 @@ public class CardRepository {
 		return rowNumber;
 	}
 
-	/*	*//**
-			* カード情報を1件追加
-			* @param data
-			* @param card_id
-			* @return
-			*//*
 
-				public int insertOne(CardData data) {
-
-				int rowNumber = jdbc.update(SQL_CARD_INSERT,
-						data.getUser_id(),
-						data.getCard_id(),
-						data.getCard_title(),
-						data.getCard_detail(),
-						data.getCard_date(),
-						data.getCard_check(),
-						data.getCard_description(),
-						data.getCard_detail_description());
-
-				return rowNumber;
-				}*/
 
 	/**
 	 * カードの変更
@@ -93,10 +87,11 @@ public class CardRepository {
 	 * @return
 	 */
 
-	public int updateOne(CardData data, Integer card_id) {
+	public int updateOne(CardData data) {
 
 		int rowNumber = jdbc.update(SQL_CARD_REVISION,
-				data.getCard_title());
+				data.getCard_title(),
+				data.getCard_id());
 		return rowNumber;
 	}
 
@@ -129,12 +124,6 @@ public class CardRepository {
 			data.setCard_id((Integer) map.get("card_id"));
 			data.setCard_title((String) map.get("card_title"));
 			data.setUser_id((String) map.get("user_id"));
-			/*data.setList_id((String) map.get("list_id"));
-			data.setCard_date((Date) map.get("card_date"));
-			data.setCard_check((String) map.get("card_check"));
-			data.setCard_description((String) map.get("card_description"));
-			data.setCard_detail_description((String) map.get("card_detail_description"));
-			*/
 			entity.getCardList().add(data);
 		}
 

@@ -36,6 +36,22 @@ public class CardService {
 	}
 
 	/**
+	 *
+	 * @param card_id
+	 * @return
+	 */
+	public CardData selectOne(Integer card_id) {
+		CardData data;
+		try {
+			data = cardRepository.selectOne(card_id);
+		}catch (DataAccessException e) {
+			e.printStackTrace();
+			data = null;
+		}
+		return data;
+	}
+
+	/**
 	 * タイトル情報のみでの生成
 	 * @param data
 	 * @param card_id
@@ -58,31 +74,15 @@ public class CardService {
 	}
 
 	/**
-	 * カードの追加
-	 * @param data
-	 * @param card_id
-	 * @return
-	 *//*
-
-		public static boolean insert(String user_id, CardData data, int card_id, String card_title) {
-
-		int rowNumber = cardRepository.insertOne(user_id, data, card_id, card_title);
-
-		boolean result = (rowNumber > 0) ? true : false;
-
-		return result;
-		}
-		*/
-	/**
 	 * カードの変更
 	 * @param data
 	 * @param card_id
 	 * @return
 	 */
 
-	public boolean updateOne(CardData data, Integer card_id) {
+	public boolean updateOne(CardData data) {
 
-		int rowNumber = cardRepository.updateOne(data, card_id);
+		int rowNumber = cardRepository.updateOne(data);
 
 		boolean result = (rowNumber > 0) ? true : false;
 

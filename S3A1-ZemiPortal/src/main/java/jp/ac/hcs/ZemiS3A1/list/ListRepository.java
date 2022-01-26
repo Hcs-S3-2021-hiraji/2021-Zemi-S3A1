@@ -71,7 +71,6 @@ public class ListRepository {
 			data.setList_id((Integer) map.get("list_id"));
 			data.setList_title((String) map.get("list_title"));
 			data.setUser_id((String) map.get("user_id"));
-			data.setCard_id((Integer) map.get("card_id"));
 			entity.getListAll().add(data);
 		}
 

@@ -15,7 +15,7 @@ INSERT INTO card (card_id, card_title, user_id)
 VALUES (1, 'aaa', 'isida@xxx.co.jp');
 
 /* リストテーブルのデータ*/
-INSERT INTO list (list_id, list_title, user_id, card_id) VALUES ('1', 'list', 'isida@xxx.co.jp', '1');
+INSERT INTO list (list_id, list_title, user_id) VALUES ('1', 'TODO', 'isida@xxx.co.jp');
 
 /* ボードテーブルのデータ */
 INSERT INTO board (borad_id, board_name, list_id) VALUES ('1', 'avkd', '1');
