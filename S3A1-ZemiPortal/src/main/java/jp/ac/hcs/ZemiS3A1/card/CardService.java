@@ -40,7 +40,7 @@ public class CardService {
 	 * @param card_id
 	 * @return
 	 */
-	public CardData selectOne(Integer card_id) {
+		public CardData selectOne(Integer card_id) {
 		CardData data;
 		try {
 			data = cardRepository.selectOne(card_id);
@@ -49,7 +49,8 @@ public class CardService {
 			data = null;
 		}
 		return data;
-	}
+		}
+
 
 	/**
 	 * タイトル情報のみでの生成

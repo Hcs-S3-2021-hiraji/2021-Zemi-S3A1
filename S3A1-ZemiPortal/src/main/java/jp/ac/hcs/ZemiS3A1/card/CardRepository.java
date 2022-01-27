@@ -53,13 +53,13 @@ public class CardRepository {
 	 * @return CardEntity
 	 * @throws DataAccessException
 	 */
-	public CardData selectOne(Integer card_id) throws DataAccessException {
+		public CardData selectOne(Integer card_id) throws DataAccessException {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_CARD_ONE, card_id);
 		CardEntity entity = mappingResult(resultList);
 		// 必ず1件のみのため、最初のCardDataを取り出す
 		CardData data = entity.getCardList().get(0);
 		return data;
-	}
+		}
 
 	/**
 	 * カードタイトルを1件追加
@@ -72,13 +72,10 @@ public class CardRepository {
 
 		int rowNumber = jdbc.update(SQL_INSERT_TITLE,
 				data.getCard_title(),
-				user_id
-				);
+				user_id);
 
 		return rowNumber;
 	}
-
-
 
 	/**
 	 * カードの変更
