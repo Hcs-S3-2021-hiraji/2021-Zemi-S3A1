@@ -53,7 +53,7 @@ public class CardRepository {
 	 * @return CardEntity
 	 * @throws DataAccessException
 	 */
-		public CardData selectOne(Integer card_id) throws DataAccessException {
+		public CardData selectOne(int card_id) throws DataAccessException {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_CARD_ONE, card_id);
 		CardEntity entity = mappingResult(resultList);
 		// 必ず1件のみのため、最初のCardDataを取り出す
@@ -118,7 +118,7 @@ public class CardRepository {
 
 			CardData data = new CardData();
 
-			data.setCard_id((Integer) map.get("card_id"));
+			data.setCard_id((int) map.get("card_id"));
 			data.setCard_title((String) map.get("card_title"));
 			data.setUser_id((String) map.get("user_id"));
 			entity.getCardList().add(data);
